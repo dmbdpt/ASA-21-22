@@ -6,5 +6,5 @@ all: main.o
 main.o: main.cpp
 	g++ $(FLAGS) main.cpp -lm -o main.o
 
-clean: main.o
+clean:
 	rm *.o
