@@ -53,14 +53,6 @@ int main()
     switch(problem_n) {
         case PROBLEM_1 : {
             vector<vector<vector<int>>> maxSubLists = findLargestSubsequences(readListInput());
-            for (vector<vector<int>> maxSubList : maxSubLists) {
-                for (vector<int> x : maxSubList) {
-                    for (int l : x) {
-                        cout << l << " ";
-                    }
-                    cout << endl;
-                }
-            }
         } break;
         case PROBLEM_2 : {
             vector<vector<vector<int>>> maxSubList1 = findLargestSubsequences(readListInput());
