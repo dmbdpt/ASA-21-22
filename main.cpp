@@ -44,6 +44,20 @@ vector<vector<vector<int>>> findLargestSubsequences(vector<int> list) {
     return maxSubLists;
 }
 
+void findLargestVectors(vector<vector<vector<int>>> vectors, int* maxSize, int* nOfMaxSizeVectors) {
+    for(vector<vector<int>> v2d : vectors) {
+        for(vector<int> v1d : v2d) {
+            if(v1d.size() > *maxSize) {
+                *maxSize = v1d.size();
+                *nOfMaxSizeVectors = 1;
+            }
+            else if(v1d.size() == *maxSize) {
+                *nOfMaxSizeVectors += 1;
+            }
+        }
+    }
+}
+
 int main()
 {
     int problem_n;
@@ -53,6 +67,9 @@ int main()
     switch(problem_n) {
         case PROBLEM_1 : {
             vector<vector<vector<int>>> maxSubLists = findLargestSubsequences(readListInput());
+            int maxSize, nOfMaxSizeVectors;
+            findLargestVectors(maxSubLists, &maxSize, &nOfMaxSizeVectors);
+            printf("%i %i", maxSize, nOfMaxSizeVectors);
         } break;
         case PROBLEM_2 : {
             vector<vector<vector<int>>> maxSubList1 = findLargestSubsequences(readListInput());
