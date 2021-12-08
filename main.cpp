@@ -20,6 +20,30 @@ vector<int> readListInput() {
     return nums;
 }
 
+vector<vector<vector<int>>> findLargestSubsequences(vector<int> list) {
+    vector<vector<vector<int>>> maxSubLists(list.size(), vector<vector<int>>(1));
+    maxSubLists[0][0].push_back(list[0]);
+    for (int i = 1; i < list.size(); i++) {
+        for (int j = 0; j < i; j++) {
+            if (list[i] > list[j]) {
+                if ((maxSubLists[i][0].size() < (maxSubLists[j][0].size()))) {
+                    maxSubLists[i].clear();
+                    for(vector<int> &jvectors : maxSubLists[j]) {
+                        maxSubLists[i].push_back(jvectors);
+                    }
+                }
+                else if((maxSubLists[i][0].size() == (maxSubLists[j][0].size()))) {
+                    maxSubLists[i].insert(maxSubLists[i].begin(), maxSubLists[j].begin(), maxSubLists[j].end());
+                }
+            }
+        }
+        for(vector<int> &maxSubList : maxSubLists[i]) {
+            maxSubList.push_back(list[i]);
+        }
+    }
+    return maxSubLists;
+}
+
 int main()
 {
     int problem_n;
@@ -28,14 +52,21 @@ int main()
 
     switch(problem_n) {
         case PROBLEM_1 : {
-            vector<int> nums = readListInput();
+            vector<vector<vector<int>>> maxSubLists = findLargestSubsequences(readListInput());
+            for (vector<vector<int>> maxSubList : maxSubLists) {
+                for (vector<int> x : maxSubList) {
+                    for (int l : x) {
+                        cout << l << " ";
+                    }
+                    cout << endl;
+                }
+            }
         } break;
         case PROBLEM_2 : {
-            vector<int> nums1 = readListInput(), nums2 = readListInput();
-            printf("%li %li", nums1.size(), nums2.size());
+            vector<vector<vector<int>>> maxSubList1 = findLargestSubsequences(readListInput());
+            vector<vector<vector<int>>> maxSubList2 = findLargestSubsequences(readListInput());
         }break;
     }
     return 0;
 }
-
 
