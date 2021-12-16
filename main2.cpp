@@ -21,9 +21,9 @@ vector<int> read()
 void exer1(vector<int> a)
 {
     vector<vector<int>> final;
-    for(int i : a){
+    //for(int i : a){
         
-    }
+    //}
 }
 
 void exer2()
