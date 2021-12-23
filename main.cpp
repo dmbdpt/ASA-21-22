@@ -6,7 +6,6 @@ using namespace std;
 #define PROBLEM_1 1
 #define PROBLEM_2 2
 
-
 vector<int> read()
 {
     vector<int> v;
@@ -77,7 +76,7 @@ int main()
         int maxSize = 0, nOfMaxSizeVectors = 0;
         vector<vector<vector<int>>> maxSubLists =
             findLargestSubsequences(read(), &maxSize, &nOfMaxSizeVectors);
-        printf("%i %i\n", maxSize, nOfMaxSizeVectors);
+        cout << maxSize << " " << nOfMaxSizeVectors << '\n';
     }
     break;
     case PROBLEM_2:
