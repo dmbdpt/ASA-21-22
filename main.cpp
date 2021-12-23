@@ -68,7 +68,7 @@ int main()
     getline(cin, c);
     ex = stoi(c);
 
-    long unsigned int maxSize = 0, nOfMaxSizeVectors = 0;
+    long unsigned int maxSize = 1, nOfMaxSizeVectors = 1;
 
     switch (ex)
     {
