@@ -21,13 +21,13 @@ vector<int> read()
     return v;
 }
 
-vector<vector<vector<int>>> findLargestSubsequences(vector<int> list, int *maxSize, int *nOfMaxSizeVectors)
+void findLargestSubsequences(vector<int> list, long unsigned int *maxSize, long unsigned int *nOfMaxSizeVectors)
 {
     vector<vector<vector<int>>> maxSubLists(list.size(), vector<vector<int>>(1));
     maxSubLists[0][0].push_back(list[0]);
-    for (int i = 1; i < list.size(); i++)
+    for (size_t i = 1; i < list.size(); i++)
     {
-        for (int j = 0; j < i; j++)
+        for (size_t j = 0; j < i; j++)
         {
             if (list[i] > list[j])
             {
@@ -59,7 +59,6 @@ vector<vector<vector<int>>> findLargestSubsequences(vector<int> list, int *maxSi
             *nOfMaxSizeVectors += maxSubLists[i].size();
         }
     }
-    return maxSubLists;
 }
 
 int main()
@@ -69,14 +68,13 @@ int main()
     getline(cin, c);
     ex = stoi(c);
 
+    long unsigned int maxSize = 0, nOfMaxSizeVectors = 0;
+
     switch (ex)
     {
     case PROBLEM_1:
     {
-        int maxSize = 0, nOfMaxSizeVectors = 0;
-        vector<vector<vector<int>>> maxSubLists =
-            findLargestSubsequences(read(), &maxSize, &nOfMaxSizeVectors);
-        cout << maxSize << " " << nOfMaxSizeVectors << '\n';
+        findLargestSubsequences(read(), &maxSize, &nOfMaxSizeVectors);
     }
     break;
     case PROBLEM_2:
@@ -84,5 +82,8 @@ int main()
     }
     break;
     }
+
+    cout << maxSize << " " << nOfMaxSizeVectors << '\n';
+
     return 0;
 }
