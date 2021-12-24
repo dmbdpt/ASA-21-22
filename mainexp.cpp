@@ -21,10 +21,10 @@ vector<int> read()
     return v;
 }
 
-void findLargestSubsequences(vector<int> list, long unsigned int *maxSize, long unsigned int *nOfMaxSizeVectors)
+void findLargestSubsequences(vector<int> list, int *maxSize, int *nOfMaxSizeVectors)
 {
-    size_t size = list.size();
-    vector<size_t> max_size_list(size, 1), n_of_max_size_list(size, 1);
+    int size = list.size();
+    vector<int> max_size_list(size, 1), n_of_max_size_list(size, 1);
 
     if(size < 1) {
         *maxSize = 0;
@@ -32,9 +32,9 @@ void findLargestSubsequences(vector<int> list, long unsigned int *maxSize, long 
         return;
     }
 
-    for (size_t i = 1; i < size; i++)
+    for (int i = 1; i < size; i++)
     {
-        for (size_t j = 0; j < i; j++)
+        for (int j = 0; j < i; j++)
         {
             if (list[i] > list[j])
             {
@@ -61,20 +61,9 @@ void findLargestSubsequences(vector<int> list, long unsigned int *maxSize, long 
     }
 }
 
-size_t findLongestCommonSubsequence(vector<int> list1, vector<int> list2, size_t list1_size, size_t list2_size)
+size_t findLongestCommonIncSubsequence(vector<int> list1, vector<int> list2, int list1_size, int list2_size)
 {
-    if(list1_size == 0 || list2_size == 0)
-    {
-        return 0;
-    }
-    if(list1[list1_size-1] == list2[list2_size-1])
-    {
-        return 1 + findLongestCommonSubsequence(list1, list2, list1_size-1, list2_size-1);
-    }
-    else
-    {
-        return max(findLongestCommonSubsequence(list1, list2, list1_size, list2_size-1), findLongestCommonSubsequence(list1, list2, list1_size-1, list2_size));
-    }
+    
 }
 
 int main()
@@ -88,7 +77,7 @@ int main()
     {
     case PROBLEM_1:
     {
-        size_t maxSize = 1, nOfMaxSizeVectors = 1;
+        int maxSize = 1, nOfMaxSizeVectors = 1;
         findLargestSubsequences(read(), &maxSize, &nOfMaxSizeVectors);
         cout << maxSize << " " << nOfMaxSizeVectors << '\n';
     }
@@ -96,8 +85,8 @@ int main()
     case PROBLEM_2:
     {
         vector<int> list1 = read(), list2 = read();
-        size_t list1_size = list1.size(), list2_size = list2.size(), maxSize;
-        maxSize = findLongestCommonSubsequence(list1, list2, list1_size, list2_size);
+        int list1_size = list1.size(), list2_size = list2.size(), maxSize;
+        maxSize = findLongestCommonIncSubsequence(list1, list2, list1_size, list2_size);
         cout << maxSize << '\n';
     }
     break;
