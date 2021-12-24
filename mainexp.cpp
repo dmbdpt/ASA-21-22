@@ -61,6 +61,22 @@ void findLargestSubsequences(vector<int> list, long unsigned int *maxSize, long 
     }
 }
 
+size_t findLongestCommonSubsequence(vector<int> list1, vector<int> list2, size_t list1_size, size_t list2_size)
+{
+    if(list1_size == 0 || list2_size == 0)
+    {
+        return 0;
+    }
+    if(list1[list1_size-1] == list2[list2_size-1])
+    {
+        return 1 + findLongestCommonSubsequence(list1, list2, list1_size-1, list2_size-1);
+    }
+    else
+    {
+        return max(findLongestCommonSubsequence(list1, list2, list1_size, list2_size-1), findLongestCommonSubsequence(list1, list2, list1_size-1, list2_size));
+    }
+}
+
 int main()
 {
     int ex;
@@ -68,22 +84,23 @@ int main()
     getline(cin, c);
     ex = stoi(c);
 
-    size_t maxSize = 1, nOfMaxSizeVectors = 1;
-
     switch (ex)
     {
     case PROBLEM_1:
     {
+        size_t maxSize = 1, nOfMaxSizeVectors = 1;
         findLargestSubsequences(read(), &maxSize, &nOfMaxSizeVectors);
+        cout << maxSize << " " << nOfMaxSizeVectors << '\n';
     }
     break;
     case PROBLEM_2:
     {
+        vector<int> list1 = read(), list2 = read();
+        size_t list1_size = list1.size(), list2_size = list2.size(), maxSize;
+        maxSize = findLongestCommonSubsequence(list1, list2, list1_size, list2_size);
+        cout << maxSize << '\n';
     }
     break;
     }
-
-    cout << maxSize << " " << nOfMaxSizeVectors << '\n';
-
     return 0;
 }
