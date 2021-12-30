@@ -48,7 +48,7 @@ void read2(vector<int>* v1, vector<int>* v2) {
 
 void findLargestSubsequences(vector<int> list, int *maxSize, int *nOfMaxSizeVectors)
 {
-    int size = list.size();
+    int size = list.size(), max_curr, n_max_curr;
     vector<int> max_size_list(size, 1), n_of_max_size_list(size, 1);
 
     if(size < 1) {
@@ -59,21 +59,28 @@ void findLargestSubsequences(vector<int> list, int *maxSize, int *nOfMaxSizeVect
 
     for (int i = 1; i < size; i++)
     {
+        max_curr = 1;
+        n_max_curr = 1;
+
         for (int j = 0; j < i; j++)
         {
             if (list[i] > list[j])
             {
-                if ((max_size_list[j] + 1) > max_size_list[i])
+                if ((max_size_list[j] + 1) > max_curr)
                 {
-                    max_size_list[i] = max_size_list[j] + 1;
-                    n_of_max_size_list[i] = n_of_max_size_list[j];
+                    max_curr = max_size_list[j] + 1;
+                    n_max_curr = n_of_max_size_list[j];
                 }
-                else if ((max_size_list[j] + 1) == max_size_list[i])
+                else if ((max_size_list[j] + 1) == max_curr)
                 {
-                    n_of_max_size_list[i] += n_of_max_size_list[j];
+                    n_max_curr += n_of_max_size_list[j];
                 }
             }
         }
+
+        max_size_list[i] = max_curr;
+        n_of_max_size_list[i] = n_max_curr;
+
         if (max_size_list[i] > *maxSize)
         {
             *maxSize = max_size_list[i];
