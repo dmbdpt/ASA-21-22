@@ -61,25 +61,25 @@ graph2: rand main.o
 	time ./main.o < testfile
 
 graph3: rand main.o
-	./random_k 1 10 0.999 100000 > testfile
+	./random_k 2 10 0.5 100000 100000> testfile
 	time ./main.o < testfile
-	./random_k 1 10 0.999 200000 > testfile
+	./random_k 2 10 0.5 200000 200000> testfile
 	time ./main.o < testfile
-	./random_k 1 10 0.999 300000 > testfile
+	./random_k 2 10 0.5 300000 300000> testfile
 	time ./main.o < testfile
-	./random_k 1 10 0.999 400000 > testfile
+	./random_k 2 10 0.5 400000 400000> testfile
 	time ./main.o < testfile
-	./random_k 1 10 0.999 500000 > testfile
+	./random_k 2 10 0.5 500000 500000> testfile
 	time ./main.o < testfile
-	./random_k 1 10 0.999 600000 > testfile
+	./random_k 2 10 0.5 600000 600000> testfile
 	time ./main.o < testfile
-	./random_k 1 10 0.999 700000 > testfile
+	./random_k 2 10 0.5 700000 700000> testfile
 	time ./main.o < testfile
-	./random_k 1 10 0.999 800000 > testfile
+	./random_k 2 10 0.5 800000 800000> testfile
 	time ./main.o < testfile
-	./random_k 1 10 0.999 900000 > testfile
+	./random_k 2 10 0.5 900000 900000> testfile
 	time ./main.o < testfile
-	./random_k 1 10 0.999 1000000 > testfile
+	./random_k 2 10 0.5 1000000 1000000 > testfile
 	time ./main.o < testfile
 	
 test: main.o
