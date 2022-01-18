@@ -33,6 +33,6 @@ bool is_acyclic(int v, vector<vector<int>> matrix, vector<char> colour) {
             return false;
         }
     }
-    colour[v-1] = 0;
+    colour[v-1] = 2;
     return true;
 }
