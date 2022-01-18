@@ -29,8 +29,10 @@ bool is_acyclic(int v, vector<vector<int>> matrix, vector<char> colour) {
           if(!a) {
             return false;
           }
-        } else {
+        } else if(colour[u-1] == 1) {
             return false;
+        } else {
+          return true;
         }
     }
     colour[v-1] = 2;
