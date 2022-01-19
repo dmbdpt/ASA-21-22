@@ -4,26 +4,24 @@
 #include <vector>
 using namespace std;
 
-vector<vector<int>> read(int* v1, int* v2) {
-  int a, b, c;
+bool read(vector<vector<int>> matrix, int* v1, int* v2) {
+  int a, b, c, d;
   scanf("%i %i\n", *v1, *v2);
-  scanf("%i %i\n", c, a);
-  vector<vector<int>> matrix(c, vector<int>(2));
+  scanf("%i %i\n", c, d);
   vector<char> colour(c, 0);
-  for(int i = 0; i < a; i++) {
+  for(int i = 0; i < d; i++) {
     scanf("%i %i\n", a, b);
-    if(matrix[a-1].size() == 2) return;
-    if(find(matrix[a-1].begin(), matrix[a-1].end(), b) != matrix[a-1].end()) return;
+    if(matrix[a-1].size() == 2) return false;
     matrix[a-1].push_back(b);
   }
   for(int i = 1; i <= c; i++) {
     if(!colour[i-1]) {
       if(!is_acyclic(i, matrix, colour)) {
-        return;
+        return false;
       }
     }
   }
-  return matrix;
+  return true;
 }
 
 bool is_acyclic(int v, vector<vector<int>> matrix, vector<char> colour) {
@@ -41,4 +39,16 @@ bool is_acyclic(int v, vector<vector<int>> matrix, vector<char> colour) {
     }
     colour[v-1] = 2;
     return true;
+}
+
+int main() {
+  int *v1, *v2;
+  vector<vector<int>> tree;
+  if(read(tree, v1, v2)) {
+    printf("true");
+  }
+  else {
+    printf("false");
+  }
+  return 0;
 }
