@@ -1,8 +1,7 @@
 #include <iostream>
-#include <algorithm>
-#include <sstream>
 #include <vector>
 #include <list>
+#include <algorithm>
 using namespace std;
 
 bool is_acyclic(int v, vector<vector<int>> matrix, vector<int> colour)
@@ -67,12 +66,13 @@ vector<vector<int>> *read(int *v1, int *v2, int* n)
     return &matrix1;
 }
 
-int lca(int v1, int v2, int n, vector<vector<int>> tree) {
-    vector<int> colour(n, 0);
+int lca(int v1, int v2, int n, vector<vector<int>> tree) 
+{
+    vector<int> colour(n, 0), colour1(n, 0), found;
     list<int> queque;
-    int curr, found = 0;;
+    int curr, found_n = 0, min_d = 999999;
 
-    colour[v1] = 1;
+    colour[v1-1] = 1;
     queque.push_back(v1);
 
     while(!queque.empty()) {
@@ -80,35 +80,44 @@ int lca(int v1, int v2, int n, vector<vector<int>> tree) {
         curr = queque.front();
         queque.pop_front();
 
-        for(int adj : tree[curr]) {
-            colour[adj] = 1;
+        for(int adj : (tree)[curr-1]) {
+            colour[adj-1] = colour[curr-1] + 1;
             queque.push_back(adj);
         }
     }
 
+    colour1[v2-1] = 1;
     queque.push_back(v2);
-    if(colour[v2]) {
-        printf("%d ", v2);
-        found++;
-    }
 
     while(!queque.empty()) {
 
         curr = queque.front();
         queque.pop_front();
 
-        for(int adj : tree[curr]) {
+        for(int adj : (tree)[curr-1]) {
+            colour1[adj-1] = colour1[curr-1] + 1;
             queque.push_back(adj);
-            if(colour[adj]) {
-                printf("%d ", adj);
-                found++;
-                if(found == 2) {
-                    return found;
-                }
+        }
+    }
+
+    for(int i = 0; i < n; i++) {
+        if(colour[i] && colour1[i]) {
+            if(min_d > min(colour[i], colour1[i])) {
+                min_d = min(colour[i], colour1[i]);
+                found.clear();
+                found.push_back(i+1);
+                found_n = 1;
+            }
+            else if(min_d == min(colour[i], colour1[i])) {
+                found.push_back(i+1);
+                found_n++;
             }
         }
     }
-    return found;  
+    for(int i : found) {
+        printf("%d ", i);
+    }
+    return found_n;  
 }
 
 int main()
