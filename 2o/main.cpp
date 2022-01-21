@@ -115,7 +115,7 @@ int main()
         vector<int> final = lca(v1, v2, *tree);
         if (!final.size())
         {
-            printf("-\n");
+            printf("0\n");
             return 0;
         }
         for (int i : final)

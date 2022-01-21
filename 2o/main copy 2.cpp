@@ -1,9 +1,8 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
 using namespace std;
 
-vector<int> colour, colour_1;
+vector<int> colour;
 int v1, v2, n;
 vector<vector<int>> tree, tree_t;
 
@@ -37,9 +36,8 @@ bool read()
         return false;
 
     colour.resize(n, 0);
-    colour_1.resize(n, 0);
-    tree.resize(n);
-    tree_t.resize(n);
+    tree.reserve(n);
+    tree_t.reserve(n);
 
     for (int i = 0; i < m; i++)
     {
@@ -67,21 +65,20 @@ bool read()
 }
 
 void colour1_dfs(int v) {
-    colour_1[v-1] = 1;
+    colour[v-1] = 5;
     for(int i : tree[v-1]) {
-        if(colour_1[i-1] != 1)
-            colour1_dfs(i);
+        colour1_dfs(i);
     }
 }
 
 void colour2_dfs(int v) {
-    if(colour_1[v-1]) {
-        colour_1[v-1] = 2;
+    if(colour[v-1] == 5) {
+        colour[v-1] = 6;
     } else {
-        colour_1[v-1] = 3;
+        colour[v-1] = 7;
     }
     for(int i : tree[v-1]) {
-        if(colour_1[i-1] < 2) 
+        if(colour[i-1] < 6) 
             colour2_dfs(i);
     }
 }
@@ -89,16 +86,20 @@ void colour2_dfs(int v) {
 vector<int> lca() 
 {
     vector<int> found;
+    int t;
     colour1_dfs(v1);
     colour2_dfs(v2);
     for(int i = 1; i <= n; i++) {
-        if(colour_1[i-1] == 2) {
-            found.push_back(i);
+        if(colour[i-1] == 6) {
+            t = 1;
             for(int child : tree_t[i-1]) {
-                if(colour_1[child - 1] == 2) {
-                    found.pop_back();
+                if(colour[child - 1] == 6) {
+                    t = 0;
                     break;
                 }
+            }
+            if(t) {
+                found.push_back(i);
             }
         }
     }
