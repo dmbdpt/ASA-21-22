@@ -29,14 +29,17 @@ bool read()
 {
     int pai, filho, m;
 
-    ios::sync_with_stdio(false);
+    if (!scanf("%i %i", &v1, &v2))
+        return false;
 
-    cin >> v1 >> v2;
-    cin >> n >> m;
+    if (!scanf("%i %i", &n, &m))
+        return false;
 
     colour.resize(n, 0);
     tree.reserve(n);
     tree_t.reserve(n);
+    
+    ios::sync_with_stdio(false);
 
     for (int i = 0; i < m; i++)
     {
