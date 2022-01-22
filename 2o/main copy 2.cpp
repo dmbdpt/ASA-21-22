@@ -29,11 +29,10 @@ bool read()
 {
     int pai, filho, m;
 
-    if (!scanf("%i %i", &v1, &v2))
-        return false;
+    ios::sync_with_stdio(false);
 
-    if (!scanf("%i %i", &n, &m))
-        return false;
+    cin >> v1 >> v2;
+    cin >> n >> m;
 
     colour.resize(n, 0);
     tree.reserve(n);
@@ -41,8 +40,7 @@ bool read()
 
     for (int i = 0; i < m; i++)
     {
-        if (!scanf("%i %i", &pai, &filho))
-            return false;
+        cin >> pai >> filho;
 
         if (tree[filho - 1].size() == 2)
             return false;
@@ -50,7 +48,7 @@ bool read()
         tree[filho - 1].push_back(pai);
         tree_t[pai - 1].push_back(filho);
     }
-
+    
     for (int i = 1; i <= n; i++)
     {
         if (!colour[i - 1])
